@@ -1,0 +1,376 @@
+Automation testing Syllabus: 
+
+Part-1 
+********************************************************************************************************
+1. History
+2. Selenium vs QTP || 
+3. Selenium Components --> IDE, Core, RC, WebDriver, Grid
+4. Initiation of Selenium script and its parts  || How to open application? 
+					a. Jar files required + Browser drivers
+					b. System property set ---| IllegalStateException
+					c. browser Invoking ---| 
+					d. URL opening
+			
+5. Locators in Selenium (By class) ---> className, CssSelector, id, linkText, PartialLinkText, name, tagname, xpath, DOM(Document Object Model) |
+6. Xpaths -> 
+			a. Absolute , Relative and Generic  | Single forward slash vs Double forward slash meaning; //* -- > Search in all tags || **Issue with absolute xpath**
+			b. How to find Xpath 
+						0. Types ---> single attribute, Multiple attribute, Contains, Text, Starts-with
+						1. Chropath -> Chrome extension we need to check xpath
+						2. FirePath + FireBug -> Firefox extension for finding xpath
+						3. xpath ancestor, child, parent, descendent etc
+7. WebDriver operations: 
+	a. Navigational| navigate().to() VS .get() differences
+						Methods: 
+							a. back()
+							b. forward()
+							c. refresh()
+							d. to(String)*
+							e. to(URL)
+							f. get()*
+	b. Get Methods*  :		
+							a.getCurrentUrl();
+							b. getTitle();
+							c. getPageSource();
+							d. getWindowHandle();**
+							e. getWindowHandles();**
+	c. Manage()
+		1. Cookies related: a. addCookie(Cookie)
+							b. deleteAllCookies()
+							c. deleteCookie(Cookie)
+							d. deleteCookieNamed(String)
+							e. getCookies()
+							f. getCookieNamed(String)
+							
+		2. ime()
+		3. Logs related: 
+							a. get(String)
+							b. getAvailableLogTypes()
+							
+		4. timeouts(): 		a. implecitlyWait(long timenum, TimeUnit);*
+							b. pageLoadTimeout(long timenum, TimeUnit);
+							c. setScriptTimeOut(long timenum, TimeUnit);
+							
+		5. window(): 		a. getPosition()
+							b. setPosition(Point arg0)
+							c. getSize()*
+							d. setSize(Point arg0)
+							e. maximize()**
+							f. fullScreen()**
+	d. WebElements finders
+							a. findElement(...)***  WebElement -> Interaction with one object/ webelement only
+							b. findElements(...)*** List<WebElement>  --> Interaction with Multiple objects/ webelements 
+	e. SwitchTo()  ---|| NoSuchElementFound --> Approch 1. Add wait 2. If the element is in frame switch to frame. 
+		1. frame() --> 	a. frame(int)* 
+						b. frame(string)*  
+						c. frame(webelement)*
+		2. alert()* --> Alert a = driver.switchTo().alert(); a.accept();|| a.dismiss(); || a.sendKeys("");
+		3. defaultContent()*  --> driver.switchTo().defaultContent();
+		4. parentFrame();
+		5. activeElement();
+		6. window(String);*
+	f. broswer closures: 
+						1. quit()**
+						2. close()**
+ 
+8. WebElement class & Methods:
+		what does webelement do? why we use it if we can write driver.findElement() ? 
+		Methods: 
+				1. Directly works:
+						a. clear()
+						b. click()**
+						c. sendKeys(String)**
+						d. submit()
+				
+				2. Finding Elemements inside: same as webdriver methods. One difference is that the elements fetched will be inside the current element.
+				3. Get methods: 
+						a.getAttribute(String)* || Example: getAttribute("value")
+						b.getCssValue(String)
+						c. getLocation()
+						d. getRect()
+						e. getScreenShotAs(OutputType<X> )*
+						f. getSize()
+						g. getTagName()*
+						h. getText()*
+				
+				4. state methods: * || Differences b/w isDispalyed(), isEnble(), isSelected()?
+						a. isDisplayed() --> true / false  ---> Images/ Error messaged
+						b. isEnable() -> Toggle 
+						c. isSelected() -> check box 
+********************************************************************************************************
+
+Part-2:
+********************************************************************************************************
+9. Handling form input fields:
+
+					1. Text input box || How to retrive the text of a grayed out element?
+					2. Radio button
+					3. Check box
+					4. Drop down --> Select class || How to fetch all data in dropdown box.   
+					
+10. Dynamic Search box handling: --Try [team]   
+11. Web table Handling :\\
+12. Dynamic Web table handling: -- assignment 
+13. Wait methods in Selenium: ***
+				a. Implecit wait
+				b. Explecit wait:
+								1. WebDriverWait Object and working with it:    WebDriverWait w = new WebDriverWait(driver,50);
+																				w.untill(ExpectedConditions.elementToBeClickable(WebElement));
+																				WebElement.click();
+								2. Different explicit Wait conditions : 
+																a.attributeContains(By locator, String attribute, String value)
+																b.elementSelectionStateToBe(By locator, boolean selected)
+																c.elementToBeClickable(By Locator)
+																d.alertIsPresent()
+																e. invisibilityOfElement(List<WebElement> webElementList)
+																f. visibilityOfElement
+																g. PresenceOfAllElementLocated(By locator)
+																h.textToBePresentInElementValue(By locator, String text)
+				
+				c. Fluent wait: 
+								1. What is fluent wait? *
+										-->  Fluent Wait in Selenium marks the maximum amount of time for Selenium WebDriver to wait for a certain condition (web element) becomes 	visible. It also defines how frequently WebDriver will check if the condition appears before throwing the “ElementNotVisibleException”.
+
+											To put it simply, Fluent Wait looks for a web element repeatedly at regular intervals until timeout happens or until the object is found.
+										
+										
+										
+										
+								2. Syntax of Fluent wait: (Only for Knoledge)
+										--> Wait wait = new FluentWait(WebDriver reference).withTimeout(timeout, SECONDS)
+												.pollingEvery(timeout, SECONDS)
+												.ignoring(Exception.class);
+
+											WebElement foo=wait.until(new Function<WebDriver, WebElement>() {
+											public WebElement applyy(WebDriver driver) {
+											return driver.findElement(By.id("foo"));
+												}
+											});
+																						
+										
+								3. Why and where we use Fluent Wait? 
+				
+14. Alert and Confirm handling: 
+15. Frame handling
+16. Pop Up handling / Advertisement pop up handling  --> Assignment  
+17. Finding links and working with them
+				a.Filtering out the broken links:
+				b.Get the empty links
+				
+18. Window handling: 
+				a. Diffrence between window and Tab
+				b. Window handling using getWindowHandles()
+				c. How to switch to specific window with selenium
+19. Actions class:  Actions ac = new Actions(driver);  ac.moveToElement() | 
+20. Mover Hover and Keyboard activity handling :
+21. Handling Drag and Drop:(Only knowledge perspective)
+22. Assertion Handling:
+						a. assertTrue
+						b. assertFalse
+						c. Hard assert and Soft assert: 
+						
+23. Handling Keyboard and Mouse activities using robot class. 
+						a. Setup (jave.awt.Robot, java.awt.AWTException....)
+						b. Keyboard activity: with KeyEvent
+						c. Mouse activity: with InputEvent
+24. Handling ScreenShot: 
+						a. Get current window screenshot
+						b. Get specific element screenshot
+						c. Get wholepage screenshot  
+						
+						 
+25. Excel File handling: Jars Required: xmlbeans-2.3.0, poi-ooxml-schemas-3.10-FINAL, poi-ooxml-3.10-FINAL, poi-3.10-FINAL, dom4j-1.6.1 [Maven Repository]
+						a. Reading data from Excel files
+						b. Writing data to Excel files
+						
+26. CSV File handling:	
+						a. Jars required: opencsv-5.5.2 + commons-lang3-3.12.0 | Classes needed: CSVReader | 
+						b. Reading the CSA file from test data 
+						
+						
+25. Handling images in Selenium:
+
+26. JavaScript Executor and its usecases
+
+********************************************************************************************************
+
+Part-3 [TESTNG Introduction]
+
+https://www.javatpoint.com/testng-annotations
+
+https://testng.org/doc/documentation-main.html#parameters-reports
+
+https://www.browserstack.com/guide/testng-framework-with-selenium-automation#:~:text=TestNG%20makes%20automated%20tests%20more,%2C%20browsers%2C%20and%20their%20versions.
+
+1. TestNG History
+2. Why we prefer TestNG/ Benifits of TestNG.
+3. Why TestNg is called TDD(Test Driven Development) framework
+4. Basic testNG annotations.
+5. TestNG xml files-- why we need them? 
+6. TestNG groups
+7. TestNG parallel testcase running.
+
+8. Assertions in TestNG ? Difference b/w assert and Verify and Wait for?
+
+								When assert is failed test is abborted.
+								When Verify fail the test will continue execution. But logging the failure.
+								When Wait for some condition to be true. They will succeed immediatly if the condition is already true. A time out will be set to make the condition true.
+								
+								
+4. Attributes with testNG annotations
+					a. Priority --> Lower value of priority will get executed first.
+					b. Enabled --> To ignore a method.
+					c. Groups --> Grouping on method for running them or stop executing them.
+					d. dataProvider --> For each data collection this method will run once i.e if 5 data collections are provided then this method will execute 5 times.
+					e. depenedsOnMethod --> If we mention any method name in this the method should be execeuted before cuurrent method execution.
+					f. alwaysRun
+					
+					***********************************************************************************************************************************
+					****Resources*****
+					
+					alwaysRun	If set to true, this test method will always be run even if it depends on a method that failed.
+					dataProvider	The name of the data provider for this test method.
+					dataProviderClass	The class where to look for the data provider. If not specified, the data provider will be looked on the class of the current test method or one of its base classes. If this attribute is specified, the data provider method needs to be static on the specified class.
+					dependsOnGroups	The list of groups this method depends on.
+					dependsOnMethods	The list of methods this method depends on.
+					description	The description for this method.
+					enabled	Whether methods on this class/method are enabled.
+					expectedExceptions	The list of exceptions that a test method is expected to throw. If no exception or a different than one on this list is thrown, this test will be marked a failure.
+					groups	The list of groups this class/method belongs to.
+					invocationCount	The number of times this method should be invoked.
+					invocationTimeOut	The maximum number of milliseconds this test should take for the cumulated time of all the invocationcounts. This attribute will be ignored if invocationCount is not specified.
+					priority	The priority for this test method. Lower priorities will be scheduled first.
+					successPercentage	The percentage of success expected from this method
+					*singleThreaded	If set to true, all the methods on this test class are guaranteed to run in the same thread, even if the tests are currently being run with parallel="methods". This attribute can only be used at the class level and it will be ignored if used at the method level. Note: this attribute used to be called sequential (now deprecated).
+					timeOut	The maximum number of milliseconds this test should take.
+					threadPoolSize	The size of the thread pool for this method. The method will be invoked from multiple threads as specified by invocationCount.
+					Note: this attribute is ignored if invocationCount is not specified
+					
+					********************************************************************************************************************************************
+5. How will you use below annotations in TestNG:
+					a.@DataProvider -->The annotation @DataProvider is used to run the test method multiple times with different sets of test data. The method which has the logic to fetch the data and arrange the same will be annotated with @DataProvider annotation and the attribute dataProvider will be used to link the test method and dataprovider method.   
+					b.@CustomAttiribute x
+					c.@Factory
+					d.@Ignore
+					e.@ObjectFactory x
+					
+					g.@Parameters
+					h.@Guice
+					i.@Listners
+					j.@NoInjection
+					k.@Optional  
+					l.@TestInstance    X
+					
+					
+6. What are different TestNG assertions? 
+7. How to run only Failed test cases.
+8. 
+9. How to run only 10 test cases in 100 test cases.
+10. How you send testNG reports. What are the different testNG reports available.
+11. 
+12. What does @Listner do? What are its methods: public class CustomListner extends BaseClass implements ITestListener 
+					a. onTestStart
+					b. onTestSucess
+					c. onTestFailure
+					d. onTestSkipped
+					e. onTestFailedButWithinSuccessPercentage
+					f. onTestFailedWithTimeout
+					g. onStart
+					h. onFinish
+
+
+********************************************************************************************************
+Part-4 [Page Object Model or POM ]
+1. History
+2. What is POM? 
+3. Why we need POM/ How it helps us in testing of our application.
+4. OOPS concepts in POM.
+5. How to create a POM project.  
+
+		a. Structure
+		b. connectivity b/w classes
+		c. making browser invocation dynamic
+		d. pages classes explained.
+			1. variables
+			2. methods
+			3. Using variables in methods
+			4. Adding external data feed.
+						a. Through Interfaces
+						b. Through Excel file
+6. Page Factory class and @FindBy annotations
+
+		@FindBys : When the required WebElement objects need to match all of the given criteria use @FindBys annotation
+
+		@FindAll : When required WebElement objects need to match at least one of the given criteria use @FindAll annotation
+
+		Usage:
+
+			@FindBys( {
+			   @FindBy(className = "class1")
+			   @FindBy(className = "class2")
+			} )
+			private List<WebElement> elementsWithBoth_class1ANDclass2;
+			
+			Here List elementsWithBothclass1ANDclass2 will contain any WebElement which satisfies both criteria.
+
+			@FindAll({
+			   @FindBy(className = "class1")
+			   @FindBy(className = "class2")
+			})
+			private List<WebElement> elementsWithEither_class1ORclass2  
+			Here List elementsWithEither_class1ORclass2 will contain all those WebElement that satisfies any one of the criteria.
+********************************************************************************************************
+Part-5 [MAVEN PROJECTS]
+1. What is maven?
+2. Why to use it?
+3. What does POM.xml do
+4. What is maven repository?
+5. What archtype in a maven repository?
+
+********************************************************************************************************
+Part-6 [CUCUMBER Basics]
+
+1. Cumcumber History . What is BDD. 
+2. Why we use cucumeber? 
+3. TDD VS BDD VS ATDD 
+4. Writing first Cucumber test and how different components are related
+5. What language does cucumber feature file use? 
+6. Cucumber Feature file mapping with Step definition.
+7. Regular expression in Cucumber.
+8. Tags in cucumber tests.
+9. Backgroup keyword in Cucumber
+10. Hooks in cucumber.
+11. Generating different reports in cucumber.
+12. Data table as List in cucumber
+13. Data table as maps in cucumber.
+14. Scenario Outline with Examples keyword in #cucumber
+15. Best practices for using GIVEN/WHEN/THEN/AND/BUT #Gherkin keywords in feature file
+16. PART-1: Hybrid frameowrk with Page Object Model with cucumber BDD & Selenium
+17. PART-2: Cucumber java BDD hybrid framework-POM 
+18. PART-3: Cucumber Java BDD hybrid Farmework-POM (Multiple feature file)
+19. PART-4: Generate Spark extent HTML and PDF report with cucumber 6.x & selenium  framework
+20. PART-5: Run cucumber feature files in Parallel mode using Maven failsafe plugin and JUNIT
+21. Part-6: Run all scenarios in Parallel mode using Cucumber-TestNG.
+22. PART-7: Cucumber feature file with Excel Data
+23. PART-8: Rerun Failure #Scenarios in cucumber BDD
+24. part-9: How to #SKIP Scenarios to Execute in Cucumber BDD
+25. Generate amazing #SERENITY HTML reports with #Cucucmber
+
+
+********************************************************************************************************
+Part-7 [Karate framework]
+1. Karate framework - Introduction and Setup Install	
+2. Why we use Karate? Is it BDD or TDD?
+3. Karate Framework - Read JSONobject and JSONArray
+4. Get API call in KARATE Framework
+5. Queary Parameter [GET API call] in Karate Framework
+6. How to pass request headers in in KARTAE framework.
+7. Read Auth Bearer TOken from config JS FIle in Karate
+8. POST API call with Karate
+9. Generat Random Email String in POST API Call in KARATE
+10. Pass JSON File in Post call in KARATE
+11. PUT Call update user using Karate
+12. Deletec API call using Karate
+13. Test Runner in Karate JUNIT5 | Run commands from MAVEN Command line
+
+********************************************************************************************************
