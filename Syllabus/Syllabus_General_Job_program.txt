@@ -1,0 +1,4 @@
+This is a job program. Please find the details below
+*******************Manual***************************
+1. Fundamental Knowledge on Testing.
+2. Testing Terminologies and Jargons.
